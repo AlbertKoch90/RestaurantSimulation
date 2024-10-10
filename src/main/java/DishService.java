@@ -17,4 +17,10 @@ public class DishService {
         List<Dish> dishes = Dish.listAll();
         return dishes.stream().map(d->d.name).collect(Collectors.joining(", "));
     }
+
+    @GET
+    public List<Dish> list(){
+        return Dish.listAll();
+    }
+
 }
