@@ -1,21 +1,37 @@
-function loadMenu(){
+function loadMenuSelectable() {
     $.get('/dishes', function(dishes) {
-        var list = '';
+        var form = '';
         (dishes || []).forEach(function (dish) {
-            list = list
-            + '<tr>'
-            + '<td>' + dish.name + '</td>'
-            + '<td>' + dish.preparationDuration + '</td>'
-            + '</tr>'
+            form = form
+            + "<option value='"
+            + dish.id
+            + "'>"
+            + dish.name
+            + "</option>"
         });
-        if(list.length > 0) {
-            list = ''
-            + '<table><thead><th>Name</th><th>Preparation Duration</th></thead>'
-            + list
-            + '</table>';
-        } else {
-            list = "No dishes in database";
+        if(form.length > 0) {
+            form = ""
+                + "<form name='Menu' id='menu' method='GET'><label>Please select your dishes</label><br><select name='Order' id='menuselect' size='" + dishes.length + "'>"
+            + form
+            + "</select> </form> <br> <button type='button' onclick='OnClick()'>Order</button>";// <input type='submit' value='Order'></form>";
+        } else
+        {
+            form = "No dishes in database";
         }
-        $('#all-dishes').html(list);
+        $('#all-dishes').html(form);
+    });
+}
+
+function OnClick(){
+    var listbox = $('#menuselect');
+    $.get('/order', {'id':listbox.val()}, function(result) {
+        if(result == "1")
+        {
+            alert("Order succesful");
+        }
+        else
+        {
+            alert("Something wrent wrong");
+        }
     });
 }
