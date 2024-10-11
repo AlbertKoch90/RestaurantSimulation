@@ -1,6 +1,8 @@
 # RestaurantSimulation
 A little project to get used to git, maven, quarkus, etc
 
+Prerequisite: Docker must be installed and running
+
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
